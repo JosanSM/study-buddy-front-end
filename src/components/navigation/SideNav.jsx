@@ -5,7 +5,7 @@ export const NAV_WIDTH = 180;
 
 const NAV_ITEMS = [
   { label: 'home', path: null },
-  { label: 'calendar', path: null },
+  { label: 'calendar', path: '/calendar' },
   { label: 'topic list', path: '/topics' },
 ];
 

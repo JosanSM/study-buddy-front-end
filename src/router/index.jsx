@@ -8,6 +8,7 @@ import ProtectedRoute from './ProtectedRoute';
 const LoginPage = lazy(() => import('../features/auth/pages/LoginPage'));
 const RegisterPage = lazy(() => import('../features/auth/pages/RegisterPage'));
 const TopicsPage = lazy(() => import('../features/topics/pages/TopicsPage'));
+const CalendarPage = lazy(() => import('../features/calendar/pages/CalendarPage'));
 
 function PageLoader() {
   return (
@@ -29,6 +30,7 @@ export default function AppRouter() {
         <Route element={<ProtectedRoute />}>
           <Route element={<AppLayout />}>
             <Route path="/topics" element={<TopicsPage />} />
+            <Route path="/calendar" element={<CalendarPage />} />
           </Route>
         </Route>
 
