@@ -97,6 +97,7 @@ export default function NewTopicPanel({ subjects, defaultSubjectId, onClose }) {
         <FormControl size="small" sx={{ minWidth: 180 }}>
           <InputLabel>Subject</InputLabel>
           <Select
+            variant="outlined"
             value={subjectId}
             label="Subject"
             onChange={(e) => setSubjectId(e.target.value)}
@@ -112,6 +113,7 @@ export default function NewTopicPanel({ subjects, defaultSubjectId, onClose }) {
         <FormControl size="small" sx={{ minWidth: 160 }}>
           <InputLabel>Topic Status</InputLabel>
           <Select
+            variant="outlined"
             value={status}
             label="Topic Status"
             onChange={(e) => setStatus(e.target.value)}

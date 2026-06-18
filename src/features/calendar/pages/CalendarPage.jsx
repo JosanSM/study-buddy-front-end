@@ -110,7 +110,7 @@ export default function CalendarPage() {
         maxWidth={false}
         sx={PANEL_DIALOG_SX}
       >
-        {selectedTopic && (
+        {selectedTopic !== null && (
           <CalendarTopicDetailPanel
             key={selectedTopic.id}
             topic={selectedTopic}

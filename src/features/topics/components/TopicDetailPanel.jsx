@@ -154,6 +154,7 @@ export default function TopicDetailPanel({ topic, subjects, onClose, footerActio
         <FormControl size="small" sx={{ minWidth: 160 }}>
           <InputLabel>Topic Status</InputLabel>
           <Select
+            variant="outlined"
             value={status}
             label="Topic Status"
             onChange={(e) => setStatus(e.target.value)}
