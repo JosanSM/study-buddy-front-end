@@ -54,6 +54,7 @@ export default function TopicsPage() {
           <FormControl size="small" sx={{ minWidth: 200 }}>
             <InputLabel>Subject</InputLabel>
             <Select
+              variant="outlined"
               value={selectedSubjectId}
               label="Select Subject"
               onChange={(e) => setSelectedSubjectId(e.target.value)}
@@ -105,7 +106,7 @@ export default function TopicsPage() {
         maxWidth={false}
         sx={PANEL_DIALOG_SX}
       >
-        {selectedTopic && (
+        {selectedTopic !== null && (
           <TopicDetailPanel
             key={selectedTopic.id}
             topic={selectedTopic}
