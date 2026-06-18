@@ -1,11 +1,8 @@
 import { Card, CardContent, CardActions, Box, Typography, IconButton, Chip } from '@mui/material';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
-import { useNavigate } from 'react-router-dom';
 import TopicStatusChip from './TopicStatusChip';
 
-export default function TopicCard({ topic }) {
-  const navigate = useNavigate();
-
+export default function TopicCard({ topic, onOpen }) {
   return (
     <Card
       variant="outlined"
@@ -23,7 +20,7 @@ export default function TopicCard({ topic }) {
       <CardActions sx={{ justifyContent: 'flex-end', pt: 0 }}>
         <IconButton
           size="small"
-          onClick={() => navigate(`/topics/${topic.id}`)}
+          onClick={() => onOpen(topic)}
           aria-label={`Open ${topic.title}`}
         >
           <ArrowForwardIcon fontSize="small" />
