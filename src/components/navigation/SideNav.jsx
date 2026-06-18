@@ -1,6 +1,8 @@
 import { Box, List, ListItem, ListItemButton, ListItemText } from '@mui/material';
 import { useNavigate, useLocation } from 'react-router-dom';
 
+export const NAV_WIDTH = 180;
+
 const NAV_ITEMS = [
   { label: 'home', path: null },
   { label: 'calendar', path: null },
@@ -15,7 +17,7 @@ export default function SideNav() {
     <Box
       component="nav"
       sx={{
-        width: 180,
+        width: NAV_WIDTH,
         flexShrink: 0,
         borderRight: '1px solid',
         borderColor: 'divider',
