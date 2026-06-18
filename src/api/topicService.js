@@ -14,3 +14,8 @@ export const updateTopic = (data) =>
 
 export const deleteTopic = (id) =>
   apiClient.delete(`/topic/${id}`);
+
+// confidence is collected client-side; included for forward-compatibility when
+// the backend adds spaced-repetition interval tuning based on confidence level.
+export const reviewTopic = (id, confidence) =>
+  apiClient.post(`/topic/${id}/review`, { confidence }).then((res) => res.data);
