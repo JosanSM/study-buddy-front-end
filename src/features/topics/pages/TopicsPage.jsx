@@ -17,28 +17,7 @@ import TopicCard from '../components/TopicCard';
 import TopicDetailPanel from '../components/TopicDetailPanel';
 import NewTopicPanel from '../components/NewTopicPanel';
 import EmptyState from '../../../components/feedback/EmptyState';
-import { NAV_WIDTH } from '../../../components/navigation/SideNav';
-
-// Shared dialog positioning for the topic panel — same proportions for both edit and create views.
-// Extracted here so both dialogs stay visually identical without duplicating the sx object.
-const PANEL_DIALOG_SX = {
-  '& .MuiDialog-container': {
-    alignItems: 'flex-start',
-    justifyContent: 'flex-start',
-  },
-  '& .MuiDialog-paper': {
-    m: 0,
-    mt: '2vh',
-    ml: { xs: '2vw', sm: `${NAV_WIDTH + 10}px` },
-    width: {
-      xs: 'calc(100vw - 4vw)',
-      sm: `calc(100vw - ${NAV_WIDTH + 10}px - 1.5vw)`,
-    },
-    height: '96vh',
-    maxWidth: 'none',
-    maxHeight: 'none',
-  },
-};
+import { PANEL_DIALOG_SX } from '../../../components/layout/panelDialogSx';
 
 export default function TopicsPage() {
   const [selectedSubjectId, setSelectedSubjectId] = useState('');
