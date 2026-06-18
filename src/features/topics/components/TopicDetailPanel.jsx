@@ -43,7 +43,7 @@ function parseNotes(notes) {
   }
 }
 
-export default function TopicDetailPanel({ topic, subjects, onClose }) {
+export default function TopicDetailPanel({ topic, subjects, onClose, footerActions = null }) {
   const containerRef = useRef(null);
   const [title, setTitle] = useState(topic.title);
   const [status, setStatus] = useState(topic.topicStatus);
@@ -179,8 +179,10 @@ export default function TopicDetailPanel({ topic, subjects, onClose }) {
         <RichTextEditor editor={editor} containerRef={containerRef} />
       </Box>
 
-      {/* Save button */}
-      <Box sx={{ display: 'flex', justifyContent: 'flex-end', flexShrink: 0 }}>
+      {/* Footer: optional left-side actions + Save button on the right.
+          space-between only takes effect when footerActions is provided. */}
+      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexShrink: 0 }}>
+        {footerActions}
         <Button variant="contained" onClick={handleSave} disabled={isPending}>
           save
         </Button>
