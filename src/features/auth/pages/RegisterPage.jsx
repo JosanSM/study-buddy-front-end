@@ -1,5 +1,5 @@
-import { Typography } from '@mui/material';
+import RegisterForm from '../components/RegisterForm';
 
 export default function RegisterPage() {
-  return <Typography align="center">Register page coming soon.</Typography>;
+  return <RegisterForm />;
 }
