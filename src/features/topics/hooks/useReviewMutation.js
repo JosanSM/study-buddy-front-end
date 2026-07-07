@@ -7,8 +7,6 @@ export function useReviewMutation() {
   return useMutation({
     mutationFn: ({ id, confidence }) => reviewTopic(id, confidence),
     onSuccess: () => {
-      // Invalidate the topics cache so the calendar grid refetches updated
-      // nextReviewAt dates immediately after marking a topic as studied.
       queryClient.invalidateQueries({ queryKey: ['topics'] });
     },
   });
