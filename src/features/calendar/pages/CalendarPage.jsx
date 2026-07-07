@@ -12,7 +12,7 @@ import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import { useCalendarTopics } from '../hooks/useCalendarTopics';
 import { useSubjects } from '../../subjects/hooks/useSubjects';
 import { CalendarGrid } from '../components/CalendarGrid';
-import { CalendarTopicDetailPanel } from '../components/CalendarTopicDetailPanel';
+import TopicDetailPanel from '../../topics/components/TopicDetailPanel';
 import { PANEL_DIALOG_SX } from '../../../components/layout/panelDialogSx';
 
 const MONTH_NAMES = [
@@ -111,7 +111,7 @@ export default function CalendarPage() {
         sx={PANEL_DIALOG_SX}
       >
         {selectedTopic !== null && (
-          <CalendarTopicDetailPanel
+          <TopicDetailPanel
             key={selectedTopic.id}
             topic={selectedTopic}
             subjects={subjects}

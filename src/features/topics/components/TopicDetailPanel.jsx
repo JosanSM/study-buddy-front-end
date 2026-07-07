@@ -21,6 +21,8 @@ import Underline from '@tiptap/extension-underline';
 import Placeholder from '@tiptap/extension-placeholder';
 import RichTextEditor from './RichTextEditor';
 import { useTopicMutations } from '../hooks/useTopicMutations';
+import { useReviewMutation } from '../hooks/useReviewMutation';
+import ConfidenceDialog from '../../../components/feedback/ConfidenceDialog';
 import { getErrorMessage } from '../../../utils/errorUtils';
 
 const STATUS_OPTIONS = [
@@ -43,14 +45,17 @@ function parseNotes(notes) {
   }
 }
 
-export default function TopicDetailPanel({ topic, subjects, onClose, footerActions = null }) {
+export default function TopicDetailPanel({ topic, subjects, onClose }) {
   const containerRef = useRef(null);
   const [title, setTitle] = useState(topic.title);
   const [status, setStatus] = useState(topic.topicStatus);
   const [menuAnchor, setMenuAnchor] = useState(null);
   const [error, setError] = useState(null);
+  const [confidenceDialogOpen, setConfidenceDialogOpen] = useState(false);
+  const [reviewError, setReviewError] = useState(null);
 
   const { update, remove } = useTopicMutations();
+  const reviewMutation = useReviewMutation();
   const subjectName = subjects.find((s) => String(s.id) === String(topic.subjectId))?.name ?? '—';
 
   const editor = useEditor({
@@ -87,6 +92,17 @@ export default function TopicDetailPanel({ topic, subjects, onClose, footerActio
       onClose();
     } catch (err) {
       setError(getErrorMessage(err));
+    }
+  };
+
+  const handleReviewConfirm = async (confidence) => {
+    setReviewError(null);
+    try {
+      await reviewMutation.mutateAsync({ id: topic.id, confidence });
+      setConfidenceDialogOpen(false);
+      onClose();
+    } catch (err) {
+      setReviewError(getErrorMessage(err));
     }
   };
 
@@ -180,14 +196,26 @@ export default function TopicDetailPanel({ topic, subjects, onClose, footerActio
         <RichTextEditor editor={editor} containerRef={containerRef} />
       </Box>
 
-      {/* Footer: optional left-side actions + Save button on the right.
-          space-between only takes effect when footerActions is provided. */}
       <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexShrink: 0 }}>
-        {footerActions}
+        <Button
+          variant="outlined"
+          onClick={() => setConfidenceDialogOpen(true)}
+          disabled={isPending || reviewMutation.isPending}
+        >
+          Mark as Studied?
+        </Button>
         <Button variant="contained" onClick={handleSave} disabled={isPending}>
-          save
+          Save
         </Button>
       </Box>
+
+      <ConfidenceDialog
+        open={confidenceDialogOpen}
+        onClose={() => setConfidenceDialogOpen(false)}
+        onConfirm={handleReviewConfirm}
+        isPending={reviewMutation.isPending}
+        error={reviewError}
+      />
     </Box>
   );
 }
